@@ -44,7 +44,7 @@ export const putDb = async (content) => {
 
 // TODO: Add logic for a method that gets all the content from the database
 
-export const getAllDb = async () => {
+export const getDb = async () => {
   console.log('getAllDb trying to work!');
   const contactDb = await openDB('jate', 1);
   const tx = contactDb.transaction('jate', 'readonly');
