@@ -4,11 +4,11 @@ const initdb = async () =>
   openDB('jate', 1, {
     upgrade(db) {
       if (db.objectStoreNames.contains('jate')) {
-        console.log('jate database already exists');
+        console.log('That database already exists!');
         return;
       }
       db.createObjectStore('jate', { keyPath: 'id', autoIncrement: true });
-      console.log('jate database created');
+      console.log('Database created!');
     },
   });
 
@@ -18,15 +18,15 @@ export const putDb = async (content) => {
 
   // edited to console.log what method I am using lol
 
-  console.log('PUT to the database');
+  console.log('PUTting to the database');
 
   // Connect to the database created above
 
-  const contactDb = await openDB('jate', 1);
+  const jateDb = await openDB('jate', 1);
 
   // Create a transaction and specify the permissions. In this case with a put, I want to wread and write
 
-  const tx = contactDb.transaction('jate', 'readwrite');
+  const tx = jateDb.transaction('jate', 'readwrite');
 
   // Open the store up
 
@@ -34,7 +34,7 @@ export const putDb = async (content) => {
 
   // Putting content into the database
 
-  const request = store.put({ id: 1, value: content });
+  const request = store.put({ jate: content });
 
   // Confirming what I want to happen, happened
 
@@ -46,13 +46,12 @@ export const putDb = async (content) => {
 
 export const getDb = async () => {
   console.log('getAllDb trying to work!');
-  const contactDb = await openDB('jate', 1);
-  const tx = contactDb.transaction('jate', 'readonly');
+  const jateDb = await openDB('jate', 1);
+  const tx = jateDb.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
   const request = store.getAll();
   const result = await request;
   console.log('result.value', result);
-  return result?.value;
 };
 
 initdb();

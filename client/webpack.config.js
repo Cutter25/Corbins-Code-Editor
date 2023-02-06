@@ -36,6 +36,8 @@ module.exports = () => {
       // Webpack Manifest
 
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: 'code-editor',
         short_name: 'JATE',
         description: 'Code Editor!',
